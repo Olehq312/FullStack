@@ -1,5 +1,5 @@
 export type Product = {
-    id: string;
+    _id: string;
     name: string;
     description: string;
     imageURL: string;
@@ -8,4 +8,12 @@ export type Product = {
     discount: boolean;
     discountPct: number;
     isHidden: boolean;
+}
+
+export type User = {
+    id: string;
+    name: string;
+    email: string;
+    password: string;
+    registeredDate: string;
 }
