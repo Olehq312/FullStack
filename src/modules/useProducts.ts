@@ -1,5 +1,7 @@
 import {ref} from 'vue';
 import type {Product} from '../interfaces/interfaces';
+const API_URL = import.meta.env.VITE_API_URL;
+
 
 
 export const useProducts = () => {
@@ -10,19 +12,17 @@ export const useProducts = () => {
     const fetchProducts = async (): Promise<void> => {
         loading.value = true;
         try {
-            const response = await fetch('https://ments-restapi.onrender.com/api/products');
+            const response = await fetch(`${API_URL}/products`);
             if (!response.ok) {
-                throw new Error('Nodata available');
+                throw new Error('No data available');
             }
-
+    
             const data: Product[] = await response.json();
             products.value = data;
-            console.log("products fetched", products.value);
-        } 
-        catch (err) {
+            console.log("Products fetched", products.value);
+        } catch (err) {
             error.value = (err as Error).message;
-        }
-        finally {
+        } finally {
             loading.value = false;
         }
     };
@@ -39,7 +39,7 @@ export const useProducts = () => {
                 throw new Error('No userID available');
             }
 
-            const response = await fetch('https://ments-restapi.onrender.com/api/products', {
+            const response = await fetch(`${API_URL}/products`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -86,7 +86,7 @@ export const useProducts = () => {
             }
 
             console.log('id test', id);
-            const response = await fetch(`https://ments-restapi.onrender.com/api/products/${id}`, {
+            const response = await fetch(`${API_URL}/products/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'auth-token': token
