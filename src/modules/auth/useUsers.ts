@@ -1,5 +1,6 @@
 import {ref} from 'vue';
 import type { User } from '@/interfaces/interfaces';
+const API_URL = import.meta.env.VITE_API_URL;
 
 export const useUsers = () => {
     const token = ref<string | null>(null);
@@ -13,7 +14,7 @@ export const useUsers = () => {
 
     const fetchToken = async( email: string, password: string): Promise<void> => {
         try{
-            const response = await fetch('https://ments-restapi.onrender.com/api/user/login', {
+            const response = await fetch(`${API_URL}/user/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -55,7 +56,7 @@ export const useUsers = () => {
 
     const registerUser = async( name: string, email: string, password: string): Promise<void> => {
         try{
-            const response = await fetch('https://ments-restapi.onrender.com/api/user/register', {
+            const response = await fetch(`${API_URL}/user/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
