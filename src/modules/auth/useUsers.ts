@@ -1,10 +1,11 @@
 import {ref} from 'vue';
 import type { User } from '@/interfaces/interfaces';
 const API_URL = import.meta.env.VITE_API_URL;
+import { state } from '../globalStates/state';
 
 export const useUsers = () => {
     const token = ref<string | null>(null);
-    const isLoggedIn = ref<boolean>(false);
+   /*  const isLoggedIn = ref<boolean>(false); */
     const error = ref<string | null>(null);
     const user = ref< User | null>(null);
 
@@ -32,7 +33,7 @@ export const useUsers = () => {
             const authResponse = await response.json();
             token.value = authResponse.data.token;
             user.value = authResponse.data.user;
-            isLoggedIn.value = true;
+            state.isLoggedIn = true;
 
             localStorage.setItem('lsToken', authResponse.data.token);
             localStorage.setItem('userIDToken', authResponse.data.userId);
@@ -42,7 +43,7 @@ export const useUsers = () => {
 
         catch (err) {
             error.value = (err as Error).message || 'An error occurred';
-            isLoggedIn.value = false;
+            state.isLoggedIn = false;
         }
 
     }
@@ -89,7 +90,7 @@ export const useUsers = () => {
     const logout = () => {
         token.value = null;
         user.value = null;
-        isLoggedIn.value = false;
+        state.isLoggedIn = false;
         localStorage.removeItem('lsToken'); 
         console.log('user is logged out');
     }
@@ -97,7 +98,7 @@ export const useUsers = () => {
 
     return {
         token,
-        isLoggedIn,
+        isLoggedIn: state.isLoggedIn,
         error,
         user,
         name,
