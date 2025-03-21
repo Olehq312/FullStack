@@ -36,3 +36,11 @@ export type User = {
     password: string;
     registeredDate: string;
 }
+
+export type CartItem = {
+    _id: string;
+    name: string;
+    price: number;
+    quantity: number;
+    imageURL: string
+}

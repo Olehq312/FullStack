@@ -15,7 +15,7 @@
 
 
         <!-- toggle cart button -->
-
+        <button @click="toggleCart">Cart</button>
 
         <!-- Routerlink to orders -->
 
@@ -27,7 +27,7 @@
   <RouterView />
 
   <!-- CartBasket component -->
-
+  <CartBasket v-if="isCartVisible" :isVisible="isCartVisible" />
 
 </template>
 
@@ -36,6 +36,15 @@ import { computed } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 import { useUsers } from './modules/auth/useUsers'
 import { state } from './modules/globalStates/state'
+
+import { ref } from 'vue'
+import CartBasket from './components/cart/CartBasketView.vue'
+
+const isCartVisible = ref(false)
+
+const toggleCart = () => {
+  isCartVisible.value = !isCartVisible.value
+}
 
 const { logout } = useUsers()
 
