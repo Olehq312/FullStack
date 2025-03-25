@@ -27,7 +27,7 @@
   <RouterView />
 
   <!-- CartBasket component -->
-  <CartBasket v-if="isCartVisible" :isVisible="isCartVisible" />
+  <CartBasket v-model:isVisible="isCartVisible" />
 
 </template>
 
