@@ -36,7 +36,7 @@
             <input type="text" class="border p-1 pr-2 bg-[#181818] text-right w-28" placeholder="Enter code" v-model="code"> <!-- Coupon code -->
             <p class="text-right font-semibold">Grand Total: $ {{ grandTotal() }}</p> <!-- Grand total in the cart -->
             <div class="flex justify-end">
-              <button class="bg-green-600 text-white p-2 mt-4 rounded hover:bg-green-700">Checkout</button> <!-- Checkout button on click -->
+              <button @click="checkOutBy" class="bg-green-600 text-white p-2 mt-4 rounded hover:bg-green-700">Checkout</button> <!-- Checkout button on click -->
             </div>
           </div>
         </div>
@@ -46,6 +46,7 @@
 
 <script setup lang="ts">
 import {useCart} from '@/modules/cart/useCart'
+import router from '@/router'
 
 const isVisible = defineModel<boolean>('isVisible')
 
@@ -54,6 +55,11 @@ const toggleCart = ():void => {
 }
 
 const {cart, code, updateQuantity, cartTotal, cartTotalIndividual, salesTax, grandTotal} = useCart()
+
+const checkOutBy = ():void => {
+  router.push('/cart')
+  isVisible.value = false
+}
 
 </script>
 

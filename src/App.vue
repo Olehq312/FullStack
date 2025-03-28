@@ -15,10 +15,10 @@
 
 
         <!-- toggle cart button -->
-        <button @click="toggleCart">Cart</button>
+        <button @click="toggleCart" class="mx-4">Cart</button>
 
         <!-- Routerlink to orders -->
-
+        <RouterLink to="/orders" class="mx-4">Orders</RouterLink>
 
       </nav>
     </div>
